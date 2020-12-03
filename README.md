@@ -4,10 +4,10 @@ These are my not-so-good solutions to advent of code. Written in Haskell.
 I use the haskell interpreter `ghci` to find solutions. I change `parse` every day, and have a function which can be passed into `load`. 
 
 ```
-solve1 :: String -> Int
+solve1 :: [String] -> Int
 solve1 _ = 889779 
 
-solve2 :: String -> Int
+solve2 :: [String] -> Int
 solve2 _ = 76110336
 
 -- parse
