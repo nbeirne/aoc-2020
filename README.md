@@ -5,7 +5,10 @@ I use the haskell interpreter `ghci` to find solutions. I change `parse` every d
 
 ```
 find1 :: String -> Int
-find1 _ = 1
+find1 _ = 889779 
+
+find2 :: String -> Int
+find2 _ = 76110336
 
 parse :: String -> String
 parse s = s
