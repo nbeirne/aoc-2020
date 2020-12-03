@@ -1,4 +1,4 @@
-These are my not-so-good solutions to advent of code. 
+These are my not-so-good solutions to advent of code. Written in Haskell.
 
 ## Boiler Plate
 I use the haskell interpreter `ghci` to find solutions. I change `parse` every day, and have a function which can be passed into `load`. 
