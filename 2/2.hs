@@ -12,15 +12,24 @@ isValid2 (fst,lst,c,s) = (c1 == c && c2 /= c) || (c1 /= c && c2 == c)
 
 find f a = length $ [e | e <- a, let (_,_,_,s) = e, f e]
 
+solve1 = find isValid1
+solve2 = find isValid2
+
+-- parse
+
 parse :: String -> (Int,Int,Char,String) 
 parse s = (read $ sn !! 0, read $ sn !! 1, s2 !! 1 !! 0, s1 !! 1)
   where s1 = splitOn ": " s
         s2 = splitOn " " $ s1 !! 0
         sn = splitOn "-" $ s2 !! 0
 
-load f = do
+
+-- boiler plate
+
+run f = do
   c <- readFile "input"
   --mapM_ putStrLn $ map (show . parse) $ lines c
-  return $ find f $ map parse $ lines c
+  putStrLn $ show $ f $ map parse $ lines c
 
-main = undefined
+main = run solve1 >> run solve2 >> return ()
+

@@ -10,14 +10,19 @@ find1 _ = 889779
 find2 :: String -> Int
 find2 _ = 76110336
 
+-- parse
+
 parse :: String -> String
 parse s = s
 
+-- boiler plate
+
 load f = do
   c <- readFile "input"
-  return $ f $ map parse $ lines c
   --mapM_ putStrLn $ map (show . parse) $ lines c
+  putStrLn $ show $ f $ map parse $ lines c
 
+main = run solve1 >> run solve2 >> return ()
 ```
 
 Usage:
