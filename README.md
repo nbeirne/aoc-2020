@@ -4,11 +4,11 @@ These are my not-so-good solutions to advent of code. Written in Haskell.
 I use the haskell interpreter `ghci` to find solutions. I change `parse` every day, and have a function which can be passed into `load`. 
 
 ```
-find1 :: String -> Int
-find1 _ = 889779 
+solve1 :: String -> Int
+solve1 _ = 889779 
 
-find2 :: String -> Int
-find2 _ = 76110336
+solve2 :: String -> Int
+solve2 _ = 76110336
 
 -- parse
 
@@ -17,7 +17,7 @@ parse s = s
 
 -- boiler plate
 
-load f = do
+run f = do
   c <- readFile "input"
   --mapM_ putStrLn $ map (show . parse) $ lines c
   putStrLn $ show $ f $ map parse $ lines c
@@ -33,9 +33,9 @@ GHCi, version 8.10.1: https://www.haskell.org/ghc/  :? for help
 Prelude> :l 1
 [1 of 1] Compiling Main             ( 1.hs, interpreted )
 Ok, one module loaded.
-*Main> load find1
+*Main> run solve1
 889779
-*Main> load find2
+*Main> run solve2
 76110336
 *Main>
 ```

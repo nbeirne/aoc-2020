@@ -4,7 +4,7 @@ solve1 lines = head [a*b | a <- lines, b <- reverse lines, a+b == 2020]
 solve2 :: [Int] -> Int
 solve2 lines = head [a*b*c | a <- lines, b <- lines, c <- lines, a+b+c == 2020]
 
--- more efficient answer. find1 and find2 work for the challenge, but this is makign those answers better
+-- more efficient answer. solve1 and solve2 work for the challenge, but this is makign those answers better
 pairs :: [a] -> [(a, a)]
 pairs [] = []
 pairs (x:xs) = [(x, y) | y <- xs] ++ pairs xs
