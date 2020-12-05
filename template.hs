@@ -14,6 +14,8 @@ parse s = s
 run f = do
   c <- readFile "input"
   --mapM_ putStrLn $ map (show . parse) $ lines c
-  putStrLn $ show $ f $ map parse $ lines c
+  let a = f $ map parse $ lines c
+  putStrLn $ show $ a
+  return a
 
 main = run solve1 >> run solve2 >> return ()
