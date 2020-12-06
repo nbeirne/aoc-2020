@@ -4,22 +4,22 @@ import qualified Data.Set as Set
 
 -- part 1
 
-solve1 :: [[String]] -> Int
-solve1 = sum . map (Set.size . Set.unions . map Set.fromList)
+solve1 :: [[Set Char]] -> Int
+solve1 = sum . map (Set.size . Set.unions)
 
 -- part 2
 
 -- similar to Set.unions ([[1,2,3],[1,2,4]]  --> [1,2])
 intersections set = foldl Set.intersection (head set) set
 
-solve2 :: [[String]] -> Int
-solve2 = sum . map (Set.size . intersections . map Set.fromList)
+solve2 :: [[Set Char]] -> Int
+solve2 = sum . map (Set.size . intersections)
   
 
 -- parse
 
-parse :: [String] -> [[String]]
-parse = splitOn [""]
+parse :: [String] -> [[Set Char]]
+parse = map (map Set.fromList) . splitOn [""]
 
 -- boiler plate
 
