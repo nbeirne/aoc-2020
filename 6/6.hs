@@ -19,7 +19,7 @@ solve2 = sum . map (Set.size . intersections)
 -- parse
 
 parse :: [String] -> [[Set Char]]
-parse = map (map Set.fromList) . splitOn [""]
+parse = splitOn [Set.empty] . map Set.fromList
 
 -- boiler plate
 
