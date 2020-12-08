@@ -1,5 +1,5 @@
 
-data End = Loop Int | End Int deriving (Show,Eq)
+data EndState = Loop Int | End Int deriving (Show,Eq)
 
 data Op = 
     Nop Int
@@ -19,27 +19,32 @@ nextState (Nop _) (MState i a v) = (MState (i+1) a (i:v))
 nextState (Acc b) (MState i a v) = (MState (i+1) (a+b) (i:v))
 nextState (Jmp j) (MState i a v) = (MState (i+j) a (i:v))
 
-eval :: [Op] -> MState -> End 
+eval :: [Op] -> MState -> EndState
 eval ops state@(MState i a v) 
   | i >= length ops = End a
   | i `elem` v = Loop a
   | otherwise = eval ops $ nextState op state
   where op = ops !! i
 
+solve1 :: [Op] -> EndState
 solve1 ops = eval ops mstateempty
 
 -- part 2
 
+swap :: Op -> Op
 swap (Nop n) = Jmp n
 swap (Jmp n) = Nop n
 swap o = o
 
-transform fst (op:rest) = case a of
-      Loop a -> transform (fst ++ [op]) rest
+-- takes two lists of operations, 'transforms' the first elem in teh second list, evaluates, then repeats until we find a non-looped end condition
+findEndCondition :: [Op] -> [Op] -> EndState
+findEndCondition fst (op:rest) = case a of
+      Loop a -> findEndCondition (fst ++ [op]) rest
       a -> a
     where a = eval (fst ++ [swap op] ++ rest) mstateempty
 
-solve2 = transform []
+solve2 :: [Op] -> EndState
+solve2 = findEndCondition []
 
 -- parse
 
