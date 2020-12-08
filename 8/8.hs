@@ -14,16 +14,17 @@ mstateempty = MState 0 0 []
 
 -- part 1
 
+nextState :: Op -> MState -> MState
+nextState (Nop _) (MState i a v) = (MState (i+1) a (i:v))
+nextState (Acc b) (MState i a v) = (MState (i+1) (a+b) (i:v))
+nextState (Jmp j) (MState i a v) = (MState (i+j) a (i:v))
+
 eval :: [Op] -> MState -> End 
 eval ops state@(MState i a v) 
   | i >= length ops = End a
   | i `elem` v = Loop a
-  | otherwise = eval' op 
+  | otherwise = eval ops $ nextState op state
   where op = ops !! i
-        eval' (Nop _) = eval ops (MState (i+1) a v')
-        eval' (Acc b) = eval ops (MState (i+1) (a+b) v')
-        eval' (Jmp j) = eval ops (MState (i+j) a v')
-        v' = i:v
 
 solve1 ops = eval ops mstateempty
 
