@@ -15,7 +15,6 @@ intersections set = foldl Set.intersection (head set) set
 solve2 :: [[Set Char]] -> Int
 solve2 = sum . map (Set.size . intersections)
   
-
 -- parse
 
 parse :: [String] -> [[Set Char]]

@@ -20,8 +20,6 @@ vertexForName vtx n = head [v | v <- vtx, name v == n]
 
 isChildOf child (Vertex _ e) = child `elem` (map fst e)
 
-tst vtxs a b = a `Set.union` (allParents vtxs b)
-
 
 -- get parents of the "goal" and recurse until there are no more parents
 allParents :: [Vertex] -> String -> Set.Set String
