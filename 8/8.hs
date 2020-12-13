@@ -36,7 +36,7 @@ swap (Nop n) = Jmp n
 swap (Jmp n) = Nop n
 swap o = o
 
--- takes two lists of operations, 'transforms' the first elem in teh second list, evaluates, then repeats until we find a non-looped end condition
+-- takes two lists of operations, 'transforms' the first elem in the second list, evaluates, then repeats until we find a non-looped end condition
 findEndCondition :: [Op] -> [Op] -> EndState
 findEndCondition fst (op:rest) = case a of
       Loop a -> findEndCondition (fst ++ [op]) rest

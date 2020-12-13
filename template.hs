@@ -22,21 +22,32 @@ test2a = solve2 test1
 
 -- boiler plate
 
-run f = do
-  c <- readFile "input"
-  --mapM_ putStrLn $ map (show . parse) $ lines c
-  let a = f $ parse c
-  --putStrLn $ show $ a
-  return a
+run func = func . parse
+runLoading file func = readFile file >>= return . run func
+runInput f = runLoading "input" f
 
-main = do
-  let t1 = solve1 test1
-  let t2 = solve2 test2
-  putStrLn $ "answer 1 correct: " ++ show (t1 == test1a) ++ " ("++ show t1 ++", expecting: "++ show test1a++")"
-  putStrLn $ "answer 2 correct: " ++ show (t2 == test2a) ++ " ("++ show t2 ++", expecting: "++ show test2a++")"
-  putStrLn ""
-  a1 <- run solve1
-  a2 <- run solve2
+test func name expected input = do
+  let a = run func input
+  if a == expected then 
+                   putStrLn $ "test "++ name ++ " success. ("++show a++")"
+                   else
+                   putStrLn $ "test "++ name ++ " failure. "++show a++" expected "++show expected
+
+
+testAll = do
+  input <- readFile "test"
+  putStrLn $ "test1 " ++ show (run solve1 input)
+  putStrLn $ "test2 " ++ show (run solve2 input)
+  test solve1 "1" test1a input
+  test solve2 "2" test2a input
+  return ()
+
+solveAll = do
+  input <- readFile "input"
+  let a1 = run solve1 input
+  let a2 = run solve2 input
   putStrLn $ "solve1: " ++ show a1
   putStrLn $ "solve2: " ++ show a2
-  return ()
+
+main = testAll >> putStrLn "" >> solveAll
+
