@@ -37,6 +37,8 @@ solve1 lines = (abs x) + (abs y)
   where state = foldl (\s i-> (eval i (head s)):s) [(start)] lines
         (State (x,y) _ _) = head state
 
+-- part 2
+
 eval2 :: String -> State -> State
 eval2 ('F':xs) (State (x,y) wp@(wx,wy) d) = State (x + (read xs)*wx, y + (read xs)*wy) wp d
 eval2 ('R':xs) s@(State pos wp d) = State pos (rotateWp (read xs) wp) d
